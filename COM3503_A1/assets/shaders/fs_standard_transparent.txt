@@ -1,0 +1,21 @@
+#version 130
+
+in vec2 aTexCoord;    
+out vec4 FragColor;    
+
+// Sampler for texture
+uniform sampler2D texDiffuse;  
+uniform bool useTexture;  // Boolean to control whether texture is used or not
+uniform vec4 windowColor; // Window color, used if there's no texture
+
+void main() {
+    // Sample the texture at the provided texture coordinates
+    vec4 texColor = texture(texDiffuse, aTexCoord);
+    
+    // If the texture's alpha is less than 0.5, discard it for transparency
+    // If you want to make the window totally transparent, set texColor.a to 0.0f.
+    texColor.a = 0.0;  // Force full transparency
+
+    // Set the output fragment color (fully transparent)
+    FragColor = texColor;
+}
